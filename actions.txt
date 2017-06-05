@@ -1,0 +1,40 @@
+{
+	"Actions": [
+	    		{
+			"id": "0",        
+			"action": "0",
+			"description": "Selecione..."
+		}
+		,
+		{
+			"id": "1",        
+			"action": "1",
+			"description": "Enviar para revisão"
+		}
+		,
+		{
+			"id": "2",        
+			"action": "2",
+			"description": "Aprovar"
+		}
+		,
+		{
+			"id": "3",        
+			"action": "3",
+			"description": "Reprovar"
+		}
+		,
+		{
+			"id": "4",        
+			"action": "4",
+			"description": "Publicar"
+		}
+		,
+		{
+			"id": "5",        
+			"action": "5",
+			"description": "Tornar obsoleto"
+		}
+		
+	]
+}
