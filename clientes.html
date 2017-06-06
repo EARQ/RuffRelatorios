@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>RUFF - Relatorio de Clientes - 1.0</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico"/>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css">
+
+    <link rel="stylesheet" href="assets/plugins/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="assets/plugins/bootstrap.min.css">
+
+    <script type="text/javascript" charset="utf8" src="assets/plugins/jquery-1.12.4.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="assets/plugins/jszip.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="assets/plugins/pdfmake.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="assets/plugins/vfs_fonts.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="assets/plugins/pdfmake.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="assets/plugins/vfs_fonts.js"></script>
+    <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
+    <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css"/>
+
+<style>
+
+#processos {
+  background-position: 10px 10px;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  font-size: 13px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#dttable_length{
+    display: none; 
+}  
+
+.blue{
+  color:#4d79ff;
+}
+.red{
+  color:#ff4d4d;
+}
+
+.hide_column{
+    display : none;
+}
+
+   
+table.dataTable.select tbody tr,
+table.dataTable thead th:first-child {
+  cursor: pointer;
+}
+    
+    
+</style>
+</head>
+
+<body class="fixed-header  dashboard">
+
+    <nav class="page-sidebar" data-pages="sidebar">
+        <div class="sidebar-menu">
+            <ul class="menu-items">
+                <li class="m-t-30">
+                    <a href="clientes.html" class="detailed">
+                    <span class="title">Clientes</span>
+                    <span class="details"></span>
+                    </a>
+                    <span class="icon-thumbnail"><i class="pg-layouts"></i></span>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </nav>
+
+
+   <div class="page-container">
+        <div class="header ">
+            <img src="assets/img/header-new-ruff.png">
+        </div>
+
+        <div class="page-content-wrapper">
+            <div class="content sm-gutter">
+                 <div class="container-fluid padding-25 sm-padding-10">
+                    <div class="row">      
+                        <div class="col-md-12">
+                                <!--
+                                <div class="row">
+                                    <div id="showActions">
+	                                    <strong>Segmentos:</strong>
+                                        <select id="segmentos" name="segmentos[]" multiple >
+                                            <option value="e3b0908f-8d72-43a1-8502-921b5f3dc1fb">01-PLN</option>
+                                            <option value="a071b1bb-8ee5-4ef9-8daf-f130da9d82a0">11-RPO</option>
+                                        </select>
+
+	                                    <strong>Grupos:</strong>
+                                        <select id="grupos" name="grupos[]" multiple >
+                                            <option value="5c1f0d38-325d-443e-a962-ac0841f099c5">GRUPO 459</option>
+                                            <option value="e862d0cd-a23c-40f1-9a9f-de334a997f33">GRUPO ADRIANO</option>
+                                            <option value="eef1e58b-b520-4392-aeb8-d57591af8dfc">GRUPO AMS</option>
+                                        </select>
+
+                                        <button type="button" id="bEnviar">Buscar</button>
+                                    </div>
+                                </div>
+                                    -->
+
+                            <div class="row">
+
+                                <table id="processos" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Noderef</th>
+                                            <th>Pasta</th>
+                                            <th>CNPJ</th>
+                                            <th>Cidade</th>
+                                            <th>Usuario</th>
+                                            <th>Criado em</th>
+                                            <th>Modificado em</th>
+                                            <th>Grupo/Unidade</th>
+                                            <th>Nodeid</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Noderef</th>
+                                            <th>Pasta</th>
+                                            <th>CNPJ</th>
+                                            <th>Cidade</th>
+                                            <th>Usuario</th>
+                                            <th>Criado em</th>
+                                            <th>Modificado em</th>
+                                            <th>Grupo/Unidade</th>
+                                            <th>Nodeid</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/plugins/modernizr.custom.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <script src="pages/js/pages.min.js"></script>
+
+<script>
+
+
+    $(document).ready(function () {
+
+        /**
+        $('#segmentos').multiselect({
+            nonSelectedText: 'Selecione...'
+        });
+
+        $('#grupos').multiselect({
+            nonSelectedText: 'Selecione...'
+        });
+        **/
+
+        $('#processos').focus();
+
+        $('#processos').DataTable({
+
+            dom: 'Bfrtip',
+
+            fixedHeader: true,
+            "paging": true,
+            "ordering": true,
+            "info": true,
+            "searching": true,
+            "ajax": 'http://ruff.ebravo.com.br/share/proxy/alfresco/rufflistaclientes',
+            //"ajax": 'docs.txt',
+            "order": [[6, "desc"]],
+            "autoWidth": false,
+            "fixedHeader": {
+                "header": false,
+                "footer": false
+            },
+
+            columnDefs: [
+                    { 'targets': 2, 'width': '30%' },
+                    { "render": function (data, type, row) { return getURL(row[1], row[2]); }, "targets": 2 },
+                    { className: "hide_column", "targets": [0, 1, 9] },
+                    { "targets": [6, 7], "type": 'date-uk' },
+                    { className: "dt-left", "targets": [2] },
+                    { className: "dt-center", "targets": [3, 4, 5, 6, 7, 8] }
+                ],
+
+            "language": {
+                "sEmptyTable": "Nenhum registro encontrado",
+                "sInfo": "Mostrando de _START_ ate _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 ate 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "_MENU_ resultados por pagina",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum registro encontrado!!!",
+                "sSearch": "Pesquisar processos:",
+                "oPaginate": {
+                    "sNext": "Proximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Ultimo"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                }
+
+            },
+
+            buttons: [
+                    'excel',
+                    {
+                        extend: 'pdfHtml5',
+                        orientation: 'landscape',
+                        width: '100%',
+                        pageSize: 'A4',
+                        exportOptions: {
+                            columns: [2, 3, 4, 5, 6, 7, 8]
+                        },
+
+                        title: 'Relatorio de Clientes',
+
+                        customize: function (doc) {
+                            doc.pageMargins = [40, 10, 10, 30];
+                            doc.defaultStyle.fontSize = 7;
+                            doc.styles.tableHeader.fontSize = 7;
+                            doc.styles.title.fontSize = 9;
+                            // Remove spaces around page title
+                            doc.content[0].text = doc.content[0].text.trim();
+                            // Create a footer
+                            doc['footer'] = (function (page, pages) {
+                                return {
+                                    columns: [
+                                            'EARQ eBravo',
+                                            {
+                                                // This is the right column
+                                                alignment: 'right',
+                                                text: ['Pag. ', { text: page.toString() }, ' de ', { text: pages.toString()}]
+                                            }
+                                        ],
+                                    margin: [10, 0]
+                                }
+                            });
+                            // Styling the table: create style object
+                            var objLayout = {};
+                            // Horizontal line thickness
+                            objLayout['hLineWidth'] = function (i) { return .5; };
+                            // Vertikal line thickness
+                            objLayout['vLineWidth'] = function (i) { return .5; };
+                            // Horizontal line color
+                            objLayout['hLineColor'] = function (i) { return '#aaa'; };
+                            // Vertical line color
+                            objLayout['vLineColor'] = function (i) { return '#aaa'; };
+                            // Left padding of the cell
+                            objLayout['paddingLeft'] = function (i) { return 4; };
+                            // Right padding of the cell
+                            objLayout['paddingRight'] = function (i) { return 4; };
+                            // Inject the object in the document
+                            doc.content[1].layout = objLayout;
+                        }
+
+
+                    }
+                ]
+
+        });
+
+
+        // Handle the send button click
+        $('#bEnviar').click(function () {
+
+            var nodelist = [];
+
+            $('#segmentos :selected').each(function (i, selected) {
+                nodelist[i] = $(selected).val();
+            });
+
+            $('#grupos :selected').each(function (i, selected) {
+                nodelist[i] = $(selected).val();
+            });
+
+            var nodeidlist = "";
+
+            $.each(nodelist, function (i, v) {
+                nodeidlist += v[10];
+
+                if (i < (nodelist.length - 1)) {
+                    nodeidlist += ";";
+                }
+            });
+
+            //nodeidlist = "e3b0908f-8d72-43a1-8502-921b5f3dc1fb";
+
+            if (nodeidlist.length > 1) {
+                $.get("http://ruff.ebravo.com.br/share/proxy/alfresco/rufflistaclientes", {
+                    paramNodeidlist: nodeidlist
+                },
+                function (data, status) {
+                    //alert("Data: " + data + "\nStatus: " + status);
+                    //console.log(data);
+                }
+                );
+
+                table.ajax.reload();
+
+            } else {
+                alert('Por favor, selecione ao menos um segmento ou grupo.');
+            }
+
+        });
+
+        // Setup - add a text input to each footer cell
+        $('#processos tfoot th').each(function () {
+            var title = $(this).text();
+            $(this).html('<input type="text" placeholder="' + title + '" />');
+        });
+
+        // DataTable
+        var table = $('#processos').DataTable();
+
+        // Apply the search
+        table.columns().every(function () {
+            var that = this;
+
+            $('input', this.footer()).on('keyup change', function () {
+                if (that.search() !== this.value) {
+                    that
+                            .search(this.value)
+                            .draw();
+                }
+            });
+        });
+
+    });
+
+
+    jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+        "date-uk-pre": function (a) {
+            if (a == null || a == "") {
+                return 0;
+            }
+            var ukDatea = a.split('/');
+            return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
+        },
+
+        "date-uk-asc": function (a, b) {
+            return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+        },
+
+        "date-uk-desc": function (a, b) {
+            return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+        }
+    });
+
+
+
+
+
+    function getCheck(ss) {
+
+        if ("Sim" == ss) {
+            return "<span class='glyphicon glyphicon-ok blue'></span>";
+        }
+        else {
+            return "<span class='glyphicon glyphicon-remove red'></span>";
+        }
+
+    }
+
+    function getURL(noderef, nome) {
+
+        return "<a href=\"http://ruff.ebravo.com.br/share/page/site/ged-corporativo/document-details?nodeRef=" + noderef + "\" target=\"_blank\">" + nome + "</a>";
+
+    }
+
+
+    function buildTableBody(data, columns) {
+        var body = [];
+
+        body.push(columns);
+
+        data.forEach(function (row) {
+            var dataRow = [];
+
+            columns.forEach(function (column) {
+                dataRow.push(row[column].toString());
+            })
+
+            body.push(dataRow);
+        });
+
+        return body;
+    }
+
+
+    function table(data, columns) {
+        return {
+            table: {
+                headerRows: 1,
+                body: buildTableBody(data, columns)
+            }
+        };
+    }
+
+
+
+
+</script>
+
+</body>
+</html>
